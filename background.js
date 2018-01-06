@@ -106,7 +106,7 @@ var active_data = "";
 
 var request_url = false;
 
-chrome.extension.onMessage.addListener(
+chrome.runtime.onMessage.addListener(
 
   function (request, sender, sendResponse) {
 
@@ -230,7 +230,7 @@ chrome.extension.onMessage.addListener(
 
 var curr_tab = "";
 
-chrome.tabs.onSelectionChanged.addListener(function (tabId, selectInfo) {
+chrome.tabs.onActivated.addListener(function (tabId, selectInfo) {
 
   curr_tab = tabId;
 

@@ -231,7 +231,7 @@
 
   var curr_tab = "";
 
-  chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo) {
+  chrome.tabs.onActivated.addListener(function(tabId, selectInfo) {
 
 		curr_tab = tabId;
 

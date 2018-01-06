@@ -18,7 +18,7 @@ function toggle(obj) {
 
 }
 
-chrome.extension.onMessage.addListener(
+chrome.runtime.onMessage.addListener(
 
   function (request, sender, sendResponse) {
 
@@ -30,7 +30,7 @@ chrome.extension.onMessage.addListener(
 
 function init() {
 
-  chrome.extension.sendMessage({ wanting: "tab_id" }, function (data) {
+  chrome.runtime.sendMessage({ wanting: "tab_id" }, function (data) {
 
     populate_window();
 
