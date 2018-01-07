@@ -1,3 +1,4 @@
+require('webextension-polyfill');
 
 function toggle(obj) {
 
@@ -18,7 +19,7 @@ function toggle(obj) {
 
 }
 
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
 
   function (request, sender, sendResponse) {
 
@@ -30,7 +31,7 @@ chrome.runtime.onMessage.addListener(
 
 function init() {
 
-  chrome.runtime.sendMessage({ wanting: "tab_id" }, function (data) {
+  browser.runtime.sendMessage({ wanting: "tab_id" }, function (data) {
 
     populate_window();
 
@@ -40,7 +41,7 @@ function init() {
 
 function populate_window() {
 
-  var bkg = chrome.extension.getBackgroundPage();
+  var bkg = browser.extension.getBackgroundPage();
   console.log('background page', bkg);
 
   var obj = bkg.active_data;

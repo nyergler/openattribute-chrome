@@ -1,10 +1,12 @@
+require('webextension-polyfill');
+
 var first_run = true;
 var RDFa_cache = "";
 var cached_namespaces = new Array("http://purl.org/dc/terms/",
   "http://creativecommons.org/#ns");
 
 var open_urls = {};
-var bkg = chrome.extension.getBackgroundPage();
+var bkg = browser.extension.getBackgroundPage();
 
 function RDFA_get(url) {
 
@@ -107,7 +109,7 @@ var url_cache = {};
 
 var request_url = false;
 
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
 
   function (request, sender, sendResponse) {
 
@@ -144,12 +146,12 @@ chrome.runtime.onMessage.addListener(
 
       curr_tab = sender.tab.id;
 
-      chrome.pageAction.show(sender.tab.id);
+      browser.pageAction.show(sender.tab.id);
 
     } else if (request.wanting == "tab_id") {
       console.log("tab id", curr_tab);
 
-      chrome.windows.getCurrent(function (window) {
+      browser.windows.getCurrent(function (window) {
 
         for (x in url_cache) {
 
@@ -212,15 +214,15 @@ chrome.runtime.onMessage.addListener(
 
         localStorage["firstrun_pagedisplay"] = true;
 
-        chrome.tabs.create({
+        browser.tabs.create({
           url: "http://openattribute.com/first-run-chrome/"
         });
 
       }
 
-      chrome.tabs.connect(sender.tab.id)
+      browser.tabs.connect(sender.tab.id)
 
-      chrome.tabs.sendMessage(sender.tab.id, "url_gimme_gimme", function () {
+      browser.tabs.sendMessage(sender.tab.id, "url_gimme_gimme", function () {
 
       }
 
@@ -232,7 +234,7 @@ chrome.runtime.onMessage.addListener(
 
 var curr_tab = "";
 
-chrome.tabs.onActivated.addListener(function (tabId, selectInfo) {
+browser.tabs.onActivated.addListener(function (tabId, selectInfo) {
 
   curr_tab = tabId;
 

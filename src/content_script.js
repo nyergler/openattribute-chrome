@@ -1,3 +1,4 @@
+require('webextension-polyfill');
 var $ = require('jquery');
 
 triplesHtml = "";
@@ -7,9 +8,9 @@ var rootNode = n;
 var triple_store = new Array();
 var license_found = false;
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+browser.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
-  chrome.runtime.sendMessage({ wanting: "url_please", data_url: document.location.href });
+  browser.runtime.sendMessage({ wanting: "url_please", data_url: document.location.href });
 
 });
 
@@ -21,7 +22,7 @@ function add_triple(data_triple) {
     if (data_triple[1] == "license") {
 
       license_found = true;
-      chrome.runtime.sendMessage({ license: "namespace", url: data_triple[2], site: data_triple[0] });
+      browser.runtime.sendMessage({ license: "namespace", url: data_triple[2], site: data_triple[0] });
 
     }
 
@@ -60,7 +61,7 @@ function add_triple(data_triple) {
       if (data_triple[1] == "license") {
 
         license_found = true;
-        chrome.runtime.sendMessage({ license: "namespace", url: data_triple[2], site: data_triple[0] });
+        browser.runtime.sendMessage({ license: "namespace", url: data_triple[2], site: data_triple[0] });
 
       }
 
@@ -72,8 +73,8 @@ function add_triple(data_triple) {
 
 namespace_data = "";
 
-chrome.runtime.sendMessage({ data: "url", url: document.location.href });
-chrome.runtime.sendMessage({ data: "title", title: document.title, url: document.location.href });
+browser.runtime.sendMessage({ data: "url", url: document.location.href });
+browser.runtime.sendMessage({ data: "title", title: document.title, url: document.location.href });
 
 setTimeout(function () {
   parse_html();
@@ -192,7 +193,7 @@ function parse_html() {
   }
 
   if (license_found) {
-    chrome.runtime.sendMessage({ url_to_show: document.location.href, show: "icon", html: triple_store });
+    browser.runtime.sendMessage({ url_to_show: document.location.href, show: "icon", html: triple_store });
   }
 
 }
