@@ -1,0 +1,27 @@
+{
+  "name": "openattribute",
+  "version": "0.0.1",
+  "description": "OpenAttribute adds support for displaying license and attribution information for works as you browse. If the page or items on the page are licensed, a CC icon will appear in the URL bar, which can be clicked to display the author and license information. This metadata is used to generate HTML which can be used to attribute reuse.",
+  "scripts": {
+    "build": "webpack --display-error-details --progress --colors -w",
+    "start": "web-ext run -s extension/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyergler/openattribute-chrome.git"
+  },
+  "author": "Pat Lockely, Nathan Yergler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nyergler/openattribute-chrome/issues"
+  },
+  "homepage": "https://github.com/nyergler/openattribute-chrome#readme",
+  "devDependencies": {
+    "web-ext": "^2.2.2",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

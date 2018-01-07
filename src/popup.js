@@ -41,8 +41,9 @@ function init() {
 function populate_window() {
 
   var bkg = chrome.extension.getBackgroundPage();
+  console.log('background page', bkg);
 
-  obj = bkg.active_data;
+  var obj = bkg.active_data;
 
   if (bkg.active_data["title"] != undefined) {
     title = bkg.active_data["title"].split("\"").join(" ").split("<").join(" ").split("javascript").join("");

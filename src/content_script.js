@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 triplesHtml = "";
 
 var n = document;
@@ -81,7 +83,7 @@ function parse_html() {
 
   if ($('[about]')) {
 
-    url = $('[about]').attr("about");
+    var url = $('[about]').attr("about");
 
     if (url != undefined) {
 

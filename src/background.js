@@ -4,6 +4,7 @@ var cached_namespaces = new Array("http://purl.org/dc/terms/",
   "http://creativecommons.org/#ns");
 
 var open_urls = {};
+var bkg = chrome.extension.getBackgroundPage();
 
 function RDFA_get(url) {
 
@@ -65,7 +66,7 @@ function get_cc(url, site) {
 
       url_cache[site]["license_link"] = url;
       url_cache[site]["license"] = data[1];
-      url_cache[site]["license_shorthand"] = data[2].split("\n").join("");
+      url_cache[site]["license_shorthand"] = "XXX"; // data[2].split("\n").join("");
 
     }
 
@@ -102,7 +103,7 @@ var attribute_info = {
 
 var url_cache = {};
 
-var active_data = "";
+// var active_data = "";
 
 var request_url = false;
 
@@ -146,16 +147,17 @@ chrome.runtime.onMessage.addListener(
       chrome.pageAction.show(sender.tab.id);
 
     } else if (request.wanting == "tab_id") {
-
-      console.log("tab id");
+      console.log("tab id", curr_tab);
 
       chrome.windows.getCurrent(function (window) {
 
         for (x in url_cache) {
 
+          console.log(x, ' in url cache: ', url_cache[x]);
           if (url_cache[x]["tab_id"] == curr_tab) {
 
-            active_data = url_cache[x];
+            console.log('setting active ', x);
+            bkg.active_data = url_cache[x];
             break;
 
           }
@@ -204,7 +206,7 @@ chrome.runtime.onMessage.addListener(
 
       url_cache[request.url_to_show]["tab_id"] = sender.tab.id;
 
-      active_data = url_cache[request.url_to_show];
+      bkg.active_data = url_cache[request.url_to_show];
 
       if (localStorage["firstrun_pagedisplay"] == undefined) {
 

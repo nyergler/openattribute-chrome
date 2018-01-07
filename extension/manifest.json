@@ -1,14 +1,13 @@
 {
   "background": {
     "scripts": [
-      "background.js"
+      "build/background.js"
     ]
   },
   "content_scripts": [
     {
       "js": [
-        "jquery.min.js",
-        "content_script.js"
+        "build/content_script.js"
       ],
       "matches": [
         "http://*/*",
@@ -34,6 +33,5 @@
     "http://*/*",
     "https://*/*"
   ],
-  "update_url": "http://clients2.google.com/service/update2/crx",
   "version": "0.95"
 }
